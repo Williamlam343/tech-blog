@@ -1,25 +1,18 @@
-<div class="container">
-  <p class="text-light fs-3"> Post:</p>
-
+{{#each posts}}
   <div class="card card-color mb-4 col-12">
     <div class="card-body">
-      <h5 class="card-title fs-4">Blog Title</h5>
-      <p class="card-text fs-5">Some quick example text to build on the card
-        title and make up the bulk of the card's content.</p>
+      <h5 class="card-title fs-4">{{this.title}}</h5>
+      <p class="card-text fs-5">{{this.post}}</p>
       <p class="card-text fs-6 text-dark text-end">
-        Date created:10/4/2021 By: username
+        Date:
+        {{format_date this.date_created}}
+        By:
+        {{this.user.username}}
+      </p>
+      <p class="card-text fs-6 text-dark text-end">
+        <button class="btn m-1 btn-danger">Delete</button>
+        <button class="btn m-1 btn-success">Update</button>
       </p>
     </div>
   </div>
-  <div class="card card-color mb-4 col-12">
-    <div class="card-body">
-      <h5 class="card-title fs-4">Blog Title</h5>
-      <p class="card-text fs-5">Some quick example text to build on the card
-        title and make up the bulk of the card's content.</p>
-      <p class="card-text fs-6 text-dark text-end">
-        Date created:10/4/2021 By: username
-      </p>
-    </div>
-  </div>
-
-</div>
+{{/each}}

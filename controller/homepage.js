@@ -1,8 +1,22 @@
 const router = require('express').Router();
 const withAuth = require("../utils/withAuth");
+const { User, Post, Comment } = require("../model")
 
 router.get('/', async (req, res) => {
-    res.render('homepage');
+    try {
+        const postData = (await Post.findAll({
+            include: [{
+                model: User,
+            }]
+        }));
+
+        const posts = postData.map((post) => post.toJSON());
+        console.log(posts)
+        res.render('homepage', { posts });
+
+    } catch (error) {
+        console.log(error)
+    }
 });
 router.get('/dashboard', async (req, res) => {
     res.render('dashboard');
