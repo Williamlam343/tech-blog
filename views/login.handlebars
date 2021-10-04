@@ -1,22 +1,22 @@
 <div class="container">
-  <form>
+  <form id="formHandler">
     <h2 class="text-light">Sign in</h2>
     <div class="mb-3 col-md-4 text-light">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" />
+      <label class="form-label">Email address</label>
+      <input type="email" class="form-control" id="email-input" />
 
     </div>
     <div class="mb-3 col-md-4">
-      <label
-        for="exampleInputPassword1"
-        class="form-label text-light"
-      >Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" />
+      <label class="form-label text-light">Password</label>
+      <input type="password" class="form-control" id="pw-input" />
     </div>
     <div class="mb-3 text-light">
-      <a class="nav-link" href="/signup">No account? Sign up now</a>
+      <a class="nav-link" href="/signup">No account? Sign up now!</a>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-
 </div>
+
+<script src="/js/login-signup.js">
+
+</script>
