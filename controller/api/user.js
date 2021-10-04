@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { User } = require("../../model")
 
+
 router.post('/', async (req, res) => {
     try {
         const userData = await User.create(req.body);
@@ -12,6 +13,7 @@ router.post('/', async (req, res) => {
             res.status(200).json(userData);
         });
     } catch (err) {
+        console.log(err)
         res.status(400).json(err);
     }
 });
@@ -27,7 +29,7 @@ router.post('/login', async (req, res) => {
             return;
         }
 
-        const validPassword = await userData.checkPassword(req.body.password);
+        const validPassword = await userData.checkPassword(req.body.checkPassword);
 
         if (!validPassword) {
             res
@@ -44,6 +46,7 @@ router.post('/login', async (req, res) => {
         });
 
     } catch (err) {
+        console.log(err)
         res.status(400).json(err);
     }
 });

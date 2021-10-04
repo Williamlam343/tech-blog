@@ -2,11 +2,11 @@ const formHandler = document.querySelector("#formHandler")
 
 async function signInUpHandler(e) {
     e.preventDefault();
-    const usernameInput = document.querySelector("#username-input").value.trim();
-    const emailInput = document.querySelector("#email-input").value.trim();
-    const pwInput = document.querySelector("#pw-input").value.trim();
+    const username = document.querySelector("#username-input").value.trim();
+    const email = document.querySelector("#email-input").value.trim();
+    const password = document.querySelector("#pw-input").value.trim();
 
-    if (usernameInput && emailInput && pwInput) {
+    if (username && email && password) {
         const res = await fetch('/api/user', {
             method: 'POST',
             body: JSON.stringify({ username, email, password }),
@@ -21,9 +21,9 @@ async function signInUpHandler(e) {
         }
     }
 
-    console.log(usernameInput)
-    console.log(emailInput)
-    console.log(pwInput)
+    console.log(username)
+    console.log(email)
+    console.log(password)
 
 }
 

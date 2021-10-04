@@ -3,13 +3,13 @@ const formHandler = document.querySelector("#formHandler")
 async function signInUpHandler(e) {
     e.preventDefault();
     // const usernameInput = document.querySelector
-    const emailInput = document.querySelector("#email-input").value.trim();
-    const pwInput = document.querySelector("#pw-input").value.trim();
+    const email = document.querySelector("#email-input").value.trim();
+    const password = document.querySelector("#pw-input").value.trim();
 
-    if (emailInput && pwInput) {
+    if (email && password) {
         const res = await fetch("/api/user/login", {
             method: "POST",
-            body: JSON.stringify({ emailInput, pwInput }),
+            body: JSON.stringify({ email, password }),
             headers: { 'Content-Type': 'application/json' },
         })
 
@@ -17,13 +17,13 @@ async function signInUpHandler(e) {
             document.location.replace("/");
             console.log("login successful")
         } else {
-            console.log("failed to login")
+            console.log("failed to log")
         }
 
     }
 
-    console.log(emailInput)
-    console.log(pwInput)
+    console.log(email)
+    console.log(password)
 
 }
 
