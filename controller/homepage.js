@@ -18,6 +18,27 @@ router.get('/', async (req, res) => {
         console.log(error)
     }
 });
+
+router.get("/", async (req, res) => {
+    try {
+        const commentData = (await Comment.findAll({
+            include: [{
+                model: User,
+            }]
+        }));
+
+        // req.session.save(() => {
+        //     req.session.user_id = userData.id;
+        //     req.session.logged_in = true;
+
+        //     res.status(200).json(userData);
+        // });
+    } catch (error) {
+        console.log(err)
+        res.status(400).json(err);
+    }
+})
+
 router.get('/dashboard', async (req, res) => {
     res.render('dashboard');
 });

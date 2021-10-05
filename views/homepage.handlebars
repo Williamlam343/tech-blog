@@ -1,5 +1,5 @@
 {{#each posts}}
-  <div class="card card-color mb-4 col-12">
+  <div class="card card-color mb-2 col-12">
     <div class="card-body">
       <h5 class="card-title fs-4">{{this.title}}</h5>
       <p class="card-text fs-5">{{this.post}}</p>
@@ -9,10 +9,47 @@
         By:
         {{this.user.username}}
       </p>
-      <p class="card-text fs-6 text-dark text-end">
-        <button class="btn m-1 btn-danger">Delete</button>
-        <button class="btn m-1 btn-success">Update</button>
-      </p>
+
+      <form id="commentHandler">
+        <button
+          id="add-comment"
+          class="btn position-absolute float-left btn-primary"
+          type="submit"
+          data-id="{{this.id}}"
+        >Add Comment</button>
+      </form>
+
+      <div class="card-text d-flex fs-6 text-dark justify-content-end">
+        <form class="edit-post">
+          <button
+            id=""
+            class="btn btn-danger delete-post"
+            type="submit"
+            data-id="{{this.id}}"
+          >Delete</button>
+          <button
+            id=""
+            href="/login"
+            class="btn btn-success update-post"
+            type="submit"
+            data-id="{{this.id}}"
+          >Update</button>
+
+        </form>
+      </div>
     </div>
   </div>
+  {{!-- {{#if}}
+{{#each}} --}}
+  {{! <div class="card card-color flex-item align-self-end mb-2 col-10">
+    <div class="card-body">
+      <p class="card-text fs-6 text-dark">Agreed!</p>
+      <p class="text-end">Date: 10/10/1000 By: username</p>
+    </div>
+  </div> }}
+  {{!-- {{/each}}
+{{/if}} --}}
+
 {{/each}}
+
+<script src="/js/homepage.js"></script>
