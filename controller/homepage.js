@@ -27,12 +27,6 @@ router.get("/", async (req, res) => {
             }]
         }));
 
-        // req.session.save(() => {
-        //     req.session.user_id = userData.id;
-        //     req.session.logged_in = true;
-
-        //     res.status(200).json(userData);
-        // });
     } catch (error) {
         console.log(err)
         res.status(400).json(err);
@@ -40,7 +34,7 @@ router.get("/", async (req, res) => {
 })
 
 router.get('/dashboard', async (req, res) => {
-    res.render('dashboard');
+    res.render('dashboard', { logged_in: req.session.logged_in, });
 });
 router.get('/login', async (req, res) => {
     res.render('login');

@@ -1,9 +1,6 @@
-const commentHandler = document.querySelector("#commentHandler")
-const editHandler = document.querySelector(".edit-post")
-const deleteBtn = document.querySelector(".delete-post")
-const updateBtn = document.querySelector(".update-post")
-const editBtn = document.querySelector(".edit-btn")
-
+const commentHandler = document.querySelectorAll(".commentHandler")
+const deleteBtn = document.querySelectorAll(".delete-post")
+const formHandler = document.querySelectorAll(".form-handler")
 
 async function addComment(event) {
     event.preventDefault();
@@ -11,9 +8,14 @@ async function addComment(event) {
     if (event.target.hasAttribute('data-id')) {
 
         const id = event.target.getAttribute('data-id');
-        console.log(id)
+        const comment = this.querySelector(".comment-text").value.trim();
+        console.log(comment)
         const response = await fetch(`/api/post/`, {
             method: 'POST',
+            body: JSON.stringify({ comment }),
+            headers: {
+                "content-type": "application/json",
+            },
         });
 
         if (response.ok) {
@@ -47,9 +49,14 @@ async function deleteComment(event) {
 
 async function updateComment(event) {
     event.preventDefault()
-    if (event.target.hasAttribute('data-id')) {
 
+    if (event.target.hasAttribute('data-id')) {
         const id = event.target.getAttribute('data-id');
+
+        const title = this.querySelector(".update-title").value.trim();
+        const post = this.querySelector(".update-text").value.trim();
+
+
         const response = await fetch(`/api/post/${id}`, {
             method: 'PUT',
             body: JSON.stringify({ title, post }),
@@ -60,6 +67,7 @@ async function updateComment(event) {
 
         if (response.ok) {
             document.location.replace('/');
+
         } else {
             console.log("failed to update post")
         }
@@ -67,7 +75,7 @@ async function updateComment(event) {
 
 }
 
-updateBtn.addEventListener("submit", updateComment)
-deleteBtn.addEventListener("click", deleteComment)
-commentHandler.addEventListener("submit", addComment)
+formHandler.forEach(async (btn) => { btn.addEventListener("click", updateComment) })
+deleteBtn.forEach((btn) => { btn.addEventListener("click", deleteComment) })
+commentHandler.forEach((btn) => { btn.addEventListener("click", addComment) })
 

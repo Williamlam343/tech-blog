@@ -10,14 +10,13 @@
         {{this.user.username}}
       </p>
 
-      <form id="commentHandler">
-        <button
-          id="add-comment"
-          class="btn position-absolute float-left btn-primary"
-          type="submit"
-          data-id="{{this.id}}"
-        >Add Comment</button>
-      </form>
+      <button
+        id="add-comment"
+        class="btn position-absolute float-left btn-primary"
+        type="button"
+        data-bs-toggle="modal"
+        data-bs-target="#commentModal-{{this.id}}"
+      >Add Comment</button>
 
       <div class="card-text d-flex fs-6 text-dark justify-content-end">
         <form class="edit-post">
@@ -29,10 +28,11 @@
           >Delete</button>
           <button
             id=""
-            href="/login"
-            class="btn btn-success update-post"
-            type="submit"
+            class="btn btn-success"
+            type="button"
             data-id="{{this.id}}"
+            data-bs-toggle="modal"
+            data-bs-target="#updateModal-{{this.id}}"
           >Update</button>
 
         </form>
@@ -49,7 +49,110 @@
   </div> }}
   {{!-- {{/each}}
 {{/if}} --}}
+{{/each}}
 
+{{! COMMENT MODALS }}
+{{#each posts}}
+  <div
+    class="modal fade"
+    id="commentModal-{{this.id}}"
+    tabindex="-1"
+    aria-labelledby="commentModal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="comment-modal">New message</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form class="commentHandler" data-id="{{this.id}}">
+            <div class="mb-3">
+              <label class="col-form-label">Comment:</label>
+              <textarea class="form-control comment-text"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            data-id="{{this.id}}"
+            class="btn btn-primary"
+          >Add Comment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/each}}
+{{! update MODAL }}
+{{#each posts}}
+  <div
+    class="modal fade"
+    id="updateModal-{{this.id}}"
+    tabindex="-1"
+    aria-labelledby="update-modal"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="update-modal">Update Post</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form class="form-handler" id="" data-id="{{this.id}}">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Title:</label>
+              <input
+                type="text"
+                class="form-control update-title"
+                placeholder="{{this.title}}"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="col-form-label">Post:</label>
+              <textarea
+                class="form-control update-text"
+              >{{this.post}}</textarea>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                id="update-post"
+                data-id="{{this.id}}"
+                class="btn btn-primary"
+              >Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 {{/each}}
 
 <script src="/js/homepage.js"></script>
