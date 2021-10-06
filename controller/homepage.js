@@ -4,38 +4,28 @@ const { User, Post, Comment } = require("../model")
 
 router.get('/', async (req, res) => {
     try {
-        const postData = (await Post.findAll({
-            include: [{ model: User }, { model: Post }]
-        }));
+        const postData = await Post.findAll({
+            include: [{ model: Comment }, { model: User }]
+        });
 
         const posts = postData.map((post) => post.toJSON());
+        const commentData = (await Comment.findAll({
+            include: [{ model: User }]
+        }));
+        const comments = commentData.map((comment) => comment.toJSON());
 
-        res.render('homepage', { posts });
+        console.log(posts)
+        console.log(comments)
+        res.render('homepage', { posts, comments });
 
     } catch (error) {
         console.log(error)
     }
 });
 
-router.get("/", async (req, res) => {
-    try {
-        const commentData = (await Comment.findAll({
-            include: [{
-                model: Post,
-            }]
-        }));
-        const comments = commentData.map((comment) => comment.toJSON());
 
-        console.log(comments)
-        res.render("homepage", { comments })
-    } catch (error) {
-        console.log(err)
-        res.status(400).json(err);
-    }
-})
-
-router.get('/dashboard', async (req, res) => {
-    res.render('dashboard', { logged_in: req.session.logged_in, });
+router.get('/dashboard', withAuth, async (req, res) => {
+    res.render('dashboard');
 });
 router.get('/login', async (req, res) => {
     res.render('login');

@@ -7,12 +7,12 @@ async function addComment(event) {
 
     if (event.target.hasAttribute('data-id')) {
 
-        const id = event.target.getAttribute('data-id');
+        const post_id = event.target.getAttribute('data-id');
         const comment = this.querySelector(".comment-text").value.trim();
         console.log(comment)
         const response = await fetch(`/api/comment/`, {
             method: 'POST',
-            body: JSON.stringify({ comment }),
+            body: JSON.stringify({ comment, post_id }),
             headers: {
                 "content-type": "application/json",
             },
