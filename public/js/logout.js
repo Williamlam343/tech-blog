@@ -1,6 +1,6 @@
 const logoff = document.querySelector('#logout')
 
-function logout() {
+async function logout() {
     const res = await fetch('/api/user/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

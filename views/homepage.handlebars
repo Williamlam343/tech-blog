@@ -39,16 +39,15 @@
       </div>
     </div>
   </div>
-  {{!-- {{#if}}
-{{#each}} --}}
-  {{! <div class="card card-color flex-item align-self-end mb-2 col-10">
+  <div class="card card-color flex-item align-self-end mb-2 col-10">
+
     <div class="card-body">
-      <p class="card-text fs-6 text-dark">Agreed!</p>
-      <p class="text-end">Date: 10/10/1000 By: username</p>
+      <p class="card-text fs-6 text-dark">{{this.comments.id}}</p>
+      <p class="text-end">{{format_date this.date_created}}
+        By:
+        {{this.user.username}}</p>
     </div>
-  </div> }}
-  {{!-- {{/each}}
-{{/if}} --}}
+  </div>
 {{/each}}
 
 {{! COMMENT MODALS }}

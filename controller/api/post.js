@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const { Post, User } = require("../../model");
+const withAuth = require("../../utils/withAuth");
 
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
     try {
         const postData = await Post.findAll({
             include: [{
@@ -14,7 +15,7 @@ router.get("/", async (req, res) => {
     }
 })
 
-router.post("/", async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
     try {
         const newPost = await Post.create({
             ...req.body,
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.destroy({
             where: {
@@ -48,7 +49,7 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
     try {
 
         const postData = await Post.update(
@@ -60,7 +61,6 @@ router.put("/:id", async (req, res) => {
                 where: {
                     id: req.params.id,
                     user_id: req.session.user_id,
-
                 }
             }
         )
