@@ -1,20 +1,13 @@
 const Sequelize = require('sequelize');
 require('dotenv').config();
 let sequelize;
-// if (process.env.DATABASE_URL) {
-//     // the application is executed on Heroku ... use the postgres database
-// } else {
-//     // the application is executed on the local machine
-//     sequelize = new Sequelize("postgres:///my_db");
-// }
+const Sequelize = require('sequelize');
+require('dotenv').config();
 
+let sequelize;
 
-if (process.env.DATABASE_URL) {
-    sequelize = new Sequelize(process.env.DATABASE_URL, {
-        dialect: 'postgres',
-        protocol: 'postgres',
-        logging: true //false
-    });
+if (process.env.JAWSDB_URL) {
+    sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
     sequelize = new Sequelize(
         process.env.DB_NAME,
@@ -29,3 +22,5 @@ if (process.env.DATABASE_URL) {
 }
 
 module.exports = sequelize;
+
+
