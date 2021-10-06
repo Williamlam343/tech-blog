@@ -6,7 +6,7 @@
   "scripts": {
     "run": "node server.js",
     "seed": "node seeds/seed.js",
-    "start": "node index.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
