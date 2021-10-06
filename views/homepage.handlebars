@@ -77,21 +77,21 @@
               <label class="col-form-label">Comment:</label>
               <textarea class="form-control comment-text"></textarea>
             </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                data-id="{{this.id}}"
+                class="btn btn-primary"
+              >Add Comment</button>
+            </div>
           </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            data-id="{{this.id}}"
-            class="btn btn-primary"
-          >Add Comment</button>
         </div>
       </div>
     </div>

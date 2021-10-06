@@ -5,13 +5,11 @@ const { User, Post, Comment } = require("../model")
 router.get('/', async (req, res) => {
     try {
         const postData = (await Post.findAll({
-            include: [{
-                model: User,
-            }]
+            include: [{ model: User }, { model: Post }]
         }));
 
         const posts = postData.map((post) => post.toJSON());
-        console.log(posts)
+
         res.render('homepage', { posts });
 
     } catch (error) {
@@ -23,10 +21,13 @@ router.get("/", async (req, res) => {
     try {
         const commentData = (await Comment.findAll({
             include: [{
-                model: User,
+                model: Post,
             }]
         }));
+        const comments = commentData.map((comment) => comment.toJSON());
 
+        console.log(comments)
+        res.render("homepage", { comments })
     } catch (error) {
         console.log(err)
         res.status(400).json(err);
