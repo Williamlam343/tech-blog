@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const withAuth = require("../utils/withAuth");
-const { User, Post, Comment } = require("../model")
+const { User, Post, Comment } = require("../model");
+
 
 router.get('/', async (req, res) => {
     try {
@@ -8,14 +9,14 @@ router.get('/', async (req, res) => {
             include: [{ model: Comment }, { model: User }]
         });
 
-        const posts = postData.map((post) => post.toJSON());
+        const posts = postData.map((post) => post.get({ plain: true }));
         const commentData = (await Comment.findAll({
             include: [{ model: User }]
         }));
         const comments = commentData.map((comment) => comment.toJSON());
-
         console.log(posts)
-        console.log(comments)
+
+
         res.render('homepage', { posts, comments });
 
     } catch (error) {
