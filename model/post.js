@@ -31,6 +31,7 @@ Post.init(
             },
         },
 
+
     },
     {
         sequelize,
